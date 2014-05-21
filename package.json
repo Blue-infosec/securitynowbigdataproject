@@ -1,0 +1,35 @@
+{
+    "name":"twapp",
+    "preferGlobal":false,
+    "version":"0.0.1",
+    "private":true,
+    "author":"Levi DeHaan <admin@levidehaan.com>",
+    "description":"time warner demo app",
+    "contributors":[
+    ],
+    "scripts":{
+        "start":"node main.js"
+    },
+    "dependencies":{
+        "express": "*",
+        "connect" : "*",
+        "minify":"*",
+        "request":"*",
+        "python": "*",
+        "async": "*",
+        "node-cassandra-cql": "*",
+        "lodash": "*",
+        "limiter":"*",
+        "memwatch":"*",
+        "memoizee" : "*",
+        "lactate" : "*",
+        "sockjs" : "*",
+        "jade" : "*",
+        "consolidate" : "*",
+        "compression" : "*",
+        "express-session" : "*",
+        "body-parser" : "*",
+        "cookie-parser" : "*"
+
+    }
+}

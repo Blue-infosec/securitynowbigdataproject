@@ -1,0 +1,5 @@
+4d5b2dd01a82fe5b20df799b133d954345d66b49	Dockerfile
+549577ade9c4e4693c8c010d42364ce022c7190d	build
+8b34f3ded7c0f2175f26bb6e4933e9564e66a842	files/spark-env.sh
+60940421ef96aeb876d1db8e858a789ad2f2e6c4	files/configure_spark.sh
+d72dbadc3904f327effddf99594045067be2f529	files/log4j.properties

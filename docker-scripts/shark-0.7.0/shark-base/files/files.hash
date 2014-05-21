@@ -1,0 +1,5 @@
+3f3cf1f7ec19ebd54e28dac78168d2c37b1c7669	Dockerfile
+41d2d341e60dfa02ef843c6cada89ebfec18043e	build
+02e6ee36d9024d6033a4ff97675c38254c7585af	files/hive-site.xml
+d6be889347890d25cb7450728cc2542af9f516ec	files/shark-env.sh
+2ce1b58ff1b51ee2b079148bb96fd9ef4edd0e82	files/configure_shark.sh

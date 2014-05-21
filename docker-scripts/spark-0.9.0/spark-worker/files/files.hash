@@ -1,0 +1,4 @@
+5fbaa6fcffc66737d933cd1a1b850c8260430327	Dockerfile
+579a175cc830d472235ccf840d27cfed4dbbcfab	build
+159301810821398dba86a449aae639139358d42e	files/run_spark_worker.sh
+cf638a0fbd32daa52e01c8d3e608923837c5d1b5	files/default_cmd

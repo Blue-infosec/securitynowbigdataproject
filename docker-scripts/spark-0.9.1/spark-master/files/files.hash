@@ -1,0 +1,4 @@
+7111591fbd4be299f11f5498243bb0c939f464df	Dockerfile
+59cbded717a546a1189316a60339e9a7008a497f	build
+f0a31d07f604541d75abc74fa78a78ec197191bc	files/default_cmd
+3792d807b1a0e0ef830ea789e531b83ec9b57da7	files/run_spark_master.sh
