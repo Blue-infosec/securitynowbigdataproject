@@ -1,19 +1,82 @@
 <!DOCTYPE html>
-<html>
-<head lang="en" ng-app="twdemo">
+<html lang="en" ng-app="tw_app" ng-controller="mainController">
+<head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="bower_components/angular-ui/build/angular-ui.css"/>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css"/>
     <link rel="stylesheet" href="css/main.css"/>
     <title>Time Warner Demo</title>
 </head>
-<body ng-controller="mainController">
-<div >
+<body>
 
+<header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="../" class="navbar-brand">TWAPP Demo</a>
+        </div>
+        <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#/singleEpisode">single episode</a>
+                </li>
+                <li>
+                    <a href="#/all">All Episodes (SLOW!)</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="https://levidehaan.com">Levi</a></li>
+                <li><a href="http://github.com/levidehaan">My Code</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main class="bs-docs-masthead" id="content" role="main">
+    <div class="container">
+        <p class="lead">Time Warner Spark/Mongo/Python/Nodejs/Angular Demo App.</p>
+
+        <p class="lead">
+            <a href="https://github.com/levidehaan/TWAppDemo" class="btn btn-outline-inverse btn-lg"
+               onclick="_gaq.push(['_trackEvent', 'Jumbotron actions', 'Download', 'Download 3.1.1']);">Go to Github
+                Page</a>
+        </p>
+    </div>
+</main>
+
+<div ng-controller="dataController" ng-model="thedata">
+    <article data-ng-repeat="data in thedata">
+        <secnow chez="data"></secnow>
+    </article>
+</div>
+
+<div ng-controller="searchController">
+    <input type="text" id="search" ng-model="searchval"/>
+
+    <div ng-repeat="dat in thedata">
+        <secnow rmtdat="dat"></secnow>
+    </div>
 </div>
 
 <script type="application/javascript" src="bower_components/angular/angular.js"></script>
 <script type="application/javascript" src="bower_components/angular-ui/build/angular-ui.js"></script>
 <script type="application/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
+<script type="application/javascript" src="bower_components/ng-resource/dist/ng-resource.js"></script>
+<script type="application/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+<script type="application/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+
+<!--Main - contains random stuff and the router-->
+<script type="application/javascript" src="js/main.js"></script>
+
+<!--Directives and Services-->
+<script type="application/javascript" src="directives/securitynow.js"></script>
+<script type="application/javascript" src="services/twapp.js"></script>
 
 </body>
 </html>

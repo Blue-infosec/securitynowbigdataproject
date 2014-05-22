@@ -17,7 +17,7 @@
         "request":"*",
         "python": "*",
         "async": "*",
-        "node-cassandra-cql": "*",
+        "mongodb": "*",
         "lodash": "*",
         "limiter":"*",
         "memwatch":"*",

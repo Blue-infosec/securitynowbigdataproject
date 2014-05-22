@@ -1,5 +1,7 @@
 # Dockerfiles for Spark and Shark
 
+#Modified from https://github.com/amplab/docker-scripts
+
 ## Contents
 
 Dockerfiles to build Spark and Shark images for testing and

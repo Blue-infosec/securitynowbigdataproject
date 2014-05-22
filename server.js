@@ -19,18 +19,12 @@ var sockjs = require('sockjs'),
     session = require('express-session'),
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser'),
-    port = 8099, cql = require('node-cassandra-cql'),
+    port = 8099, mongo = require('mongodb').MongoClient,
     spawn = require('child_process').spawn,
     exec = require('child_process').exec,
-    program = require('commander');
+    program = require('commander'), collection,
+    format = require('util').format;
 
-var client = new cql.Client({hosts: ['localhost'], keyspace: 'twapp'});
-client.execute('SELECT key, email, last_name FROM user_profiles WHERE key=?', ['jbay'],
-    function (err, result) {
-        if (err) console.log('execute failed');
-        else console.log('got user profile with email ' + result.rows[0].email);
-    }
-);
 
 memwatch.on('leak', function (info) {
 
@@ -104,6 +98,34 @@ if (cluster.isMaster) { // fork worker threads
         res.send(index);
         console.log("/ HEADERS: ", req.headers['user-agent']);
     });
+
+    mongo.connect('mongodb://172.17.0.5:27017/twapp_storage', function(err, db) {
+        if(err) throw err;
+
+        collection = db.collection('posts');
+
+        collection.find("security",{fields: {Data: 1}}).toArray(function(err, docs) {
+            console.log("Returned #" + docs.length + " documents");
+        });
+
+        app.get('/fullset', function(req, res){
+            collection.find().toArray(function(err, docs) {
+                console.log("Returned #" + docs.length + " documents");
+                res.send(docs);
+            });
+        });
+
+        app.get('/episode/:num', function(req, res){
+            collection.find({ episode: req.params['num'] } ).toArray(function(err, docs) {
+                console.log("Returned #" + docs.length + " documents");
+                res.send(docs);
+            });
+        });
+    });
+
+
+
+
 
     console.log("PORT HTTP: ", port);
 

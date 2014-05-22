@@ -8,6 +8,6 @@ EXPOSE 8888
 
 ADD files /root/spark_worker_files
 
-# Add the entrypoint script for the master
 CMD ["-h"]
+
 ENTRYPOINT ["/root/spark_worker_files/default_cmd"]

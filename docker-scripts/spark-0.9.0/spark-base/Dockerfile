@@ -17,13 +17,12 @@ RUN (cd / && gunzip < scala-$SCALA_VERSION.tgz)|(cd /opt && tar -xvf -)
 RUN rm /scala-$SCALA_VERSION.tgz
 
 # Install Spark 
-ADD http://d3kbcqa49mib13.cloudfront.net/spark-$SPARK_VERSION-incubating-bin-hadoop2.tgz /
-RUN (cd / && gunzip < spark-$SPARK_VERSION-incubating-bin-hadoop2.tgz)|(cd /opt && tar -xvf -)
-RUN (ln -s /opt/spark-$SPARK_VERSION-incubating-bin-hadoop2 /opt/spark-$SPARK_VERSION && rm /spark-$SPARK_VERSION-incubating-bin-hadoop2.tgz)
+ADD http://d3kbcqa49mib13.cloudfront.net/spark-$SPARK_VERSION-incubating-bin-hadoop1.tgz /
+RUN (cd / && gunzip < spark-$SPARK_VERSION-incubating-bin-hadoop1.tgz)|(cd /opt && tar -xvf -)
+RUN (ln -s /opt/spark-$SPARK_VERSION-incubating-bin-hadoop1 /opt/spark-$SPARK_VERSION && rm /spark-$SPARK_VERSION-incubating-bin-hadoop1.tgz)
 
 # Add Shark config files and configure script
 ADD files /root/spark_files
 
-WORKDIR /opt/spark-0.9.0
-
-RUN /opt/spark-0.9.0/sbt/sbt assembly
+WORKDIR /opt/spark-0.9.0-incubating-bin-hadoop1
+RUN sbt/sbt assembly

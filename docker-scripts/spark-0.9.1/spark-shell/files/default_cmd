@@ -11,6 +11,7 @@ echo "adding test data to HDFS"
 cp /root/spark_shell_files/test.txt /tmp
 sudo -u hdfs hadoop dfsadmin -safemode wait
 sudo -u hdfs hadoop fs -put /tmp/test.txt hdfs://master:9000/user/hdfs/test.txt
+sudo -u hdfs hadoop fs -put /data hdfs://master:9000/data
 
 cp /root/spark_shell_files/test.spark /
 

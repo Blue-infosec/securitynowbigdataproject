@@ -11,18 +11,23 @@ ENV SCALA_HOME /opt/scala-$SCALA_VERSION
 ENV SPARK_HOME /opt/spark-$SPARK_VERSION
 ENV PATH $SPARK_HOME:$SCALA_HOME/bin:$PATH
 
+RUN apt-get install python-dev less net-tools apt-utils vim-tiny sudo openssh-server iputils-ping git wget curl python-pip -y
+RUN /usr/bin/yes | sudo pip install nltk numpy
+
 # Install Scala
 ADD http://www.scala-lang.org/files/archive/scala-$SCALA_VERSION.tgz /
 RUN (cd / && gunzip < scala-$SCALA_VERSION.tgz)|(cd /opt && tar -xvf -)
 RUN rm /scala-$SCALA_VERSION.tgz
 
+WORKDIR /opt/scala-2.11.0/ RUN export PATH=`pwd`/bin:$PATH && export SCALA_HOME=`pwd`
+
 # Install Spark
-ADD http://mirror.nexcess.net/apache/incubator/spark/spark-$SPARK_VERSION/spark-$SPARK_VERSION-bin-hadoop2.tgz /
-RUN (cd / && gunzip < spark-$SPARK_VERSION-bin-hadoop2.tgz)|(cd /opt && tar -xvf -)
-RUN (ln -s /opt/spark-$SPARK_VERSION-bin-hadoop2 /opt/spark-$SPARK_VERSION && rm /spark-$SPARK_VERSION-bin-hadoop2.tgz)
+ADD http://d3kbcqa49mib13.cloudfront.net/spark-0.9.1-bin-hadoop2.tgz /opt
+
+WORKDIR /opt RUN tar -xvf spark-0.9.1-bin-hadoop2.tgz
+WORKDIR /opt RUN (ln -s /opt/spark-0.9.1-bin-hadoop2 /opt/spark-0.9.1 && rm spark-0.9.1-bin-hadoop2.tgz)
 
 # Add Shark config files and configure script
 ADD files /root/spark_files
 
-#WORKDIR /opt/spark-$SPARK_VERSION
-#RUN (sbt/sbt clean compile && sbt/sbt assembly)
+WORKDIR /opt/spark-0.9.1 RUN sbt/sbt clean assembly
