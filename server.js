@@ -49,10 +49,10 @@ if (cluster.isMaster) { // fork worker threads
 
     worker.on('death', function (worker) {
         // Log deaths!
-        console.log(me.name + ': worker ' + worker.pid + ' died.');
+        console.log(': worker ' + worker.pid + ' died.');
         // If autoRestart is true, spin up another to replace it
         if (this.autoRestart) {
-            console.log(me.name + ': Restarting worker thread...');
+            console.log(': Restarting worker thread...');
             cluster.fork();
         }
     });
@@ -109,6 +109,8 @@ if (cluster.isMaster) { // fork worker threads
         });
 
         app.get('/fullset', function(req, res){
+            console.log("SOMEONE's Browser is about to get Really sluggish!");
+            console.log("/ HEADERS: ", req.headers['user-agent']);
             collection.find().toArray(function(err, docs) {
                 console.log("Returned #" + docs.length + " documents");
                 res.send(docs);
@@ -116,15 +118,24 @@ if (cluster.isMaster) { // fork worker threads
         });
 
         app.get('/episode/:num', function(req, res){
+            console.log("/ HEADERS: ", req.headers['user-agent']);
+            console.log("CONNECTION FROM: ", req.headers)
             collection.find({ episode: req.params['num'] } ).toArray(function(err, docs) {
-                console.log("Returned #" + docs.length + " documents");
+                console.log("Returned #" + docs.length + " Epidsode based documents");
+                res.send(docs);
+            });
+        });
+
+        app.get('/search/:val', function(req, res){
+            console.log("/ HEADERS: ", req.headers['user-agent']);
+            console.log("CONNECTION FROM: ", req.headers)
+            console.log("QUERY VALUES: ", req.params['val']);
+            collection.find({ original: {"$regex": req.params['val'] }} ).toArray(function(err, docs) {
+                console.log("Returned #" + docs.length + " Epidsode based documents");
                 res.send(docs);
             });
         });
     });
-
-
-
 
 
     console.log("PORT HTTP: ", port);

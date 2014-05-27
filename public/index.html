@@ -24,10 +24,10 @@
         <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="#/singleEpisode">single episode</a>
+                    <a href="#/single">single episode</a>
                 </li>
                 <li>
-                    <a href="#/all">All Episodes (SLOW!)</a>
+                    <a href="#/all">All Episodes (SLOW! )</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -50,18 +50,12 @@
     </div>
 </main>
 
+
 <div ng-controller="dataController" ng-model="thedata">
+    <input type="text" id="search" ng-model="searchval"/>
     <article data-ng-repeat="data in thedata">
         <secnow chez="data"></secnow>
     </article>
-</div>
-
-<div ng-controller="searchController">
-    <input type="text" id="search" ng-model="searchval"/>
-
-    <div ng-repeat="dat in thedata">
-        <secnow rmtdat="dat"></secnow>
-    </div>
 </div>
 
 <script type="application/javascript" src="bower_components/angular/angular.js"></script>
@@ -75,8 +69,12 @@
 <script type="application/javascript" src="js/main.js"></script>
 
 <!--Directives and Services-->
+<script type="application/javascript" src="controllers/dataController.js"></script>
+<script type="application/javascript" src="controllers/mainController.js"></script>
+<script type="application/javascript" src="controllers/searchController.js"></script>
 <script type="application/javascript" src="directives/securitynow.js"></script>
 <script type="application/javascript" src="services/twapp.js"></script>
+
 
 </body>
 </html>

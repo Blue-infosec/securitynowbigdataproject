@@ -1,8 +1,8 @@
-4d4fd2bec5a866607b8f993344920553269bb48f-e 	Dockerfile
-1a58322b4c4b2e2ddd3fd12f067a6a2bf341af59-e 	build
-9742f90b6b7d96f77cf324ad8ee16f4aa130e6ba-e 	files/core-site.xml
-4c25cb03786faeb49d13209885787196ae766c9c-e 	files/hdfs-site.xml
-4693cd77097fbe7716f9fcc1498372d0c4400f86-e 	files/id_rsa
-1e6eb91fd3671e65cefd69779459def06e421aad-e 	files/configure_hadoop.sh
-4e9c1c0892389c253905d88ebdb0a00c879aaed3-e 	files/id_rsa.pub
-0cb5dd444201e204b5951791279954462f93e00b-e 	files/authorized_keys
+ebf5767a3000afca492cd6435dcd9edcd96134c6	Dockerfile
+9742f90b6b7d96f77cf324ad8ee16f4aa130e6ba	files/core-site.xml
+4c25cb03786faeb49d13209885787196ae766c9c	files/hdfs-site.xml
+4693cd77097fbe7716f9fcc1498372d0c4400f86	files/id_rsa
+1e6eb91fd3671e65cefd69779459def06e421aad	files/configure_hadoop.sh
+4e9c1c0892389c253905d88ebdb0a00c879aaed3	files/id_rsa.pub
+0cb5dd444201e204b5951791279954462f93e00b	files/authorized_keys
+522c9b21e5aab007d5d3b3403fef88368efd8250	build.sh

@@ -1,7 +1,15 @@
 .pos {
     background-color: #00aa00;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-top: 1px solid black;
+
 }
 
 .neg {
     background-color: #950B02;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-top: 1px solid black;
+
 }

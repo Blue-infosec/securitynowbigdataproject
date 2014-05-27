@@ -1,17 +1,24 @@
-angular.module("tw_app").directive('securitynow', function (gettwapp) {
-    var template = '<dl class="gettwapp" ng-repeat="">' +
-        '<dt><a class="gettwappInstance" href="{{gettwapp.id}}">{{gettwapp.title}}</a></dt>' +
-        '</dl>';
-              console.log("DIRECTIVE IS FINALLY BEING CALLED!!!");
+twapp.directive("secnow", function(gettwapp){
+
+    console.log("Project INITIALIZED!!!!");
+
+    var template = '<div class="{{ rmatdat.sentiment }}">' +
+        '<div class="episode">{{ rmatdat.episode }}</div>' +
+        '' +
+        '<div class="name">{{ rmatdat.speaker }}</div>' +
+        '<div class="description">{{ rmatdat.original }}</div>' +
+        '<div class="highlight">{{ rmatdat.sentiment }}</a>' +
+        '</div>';
+
     return {
         restrict:'E',
-        scope:{ twapp:"="},
-        template:template,
-        link:function (scope, lelement, attrs) {
-            gettwapp.episode(scope.twapp, function (data) {
-                console.log("HOLY CRAP LOOK AT THIS DATA!: ", data);
-                lelement.find("dl").append("<dd class=\"actualdata\">" + data + "</dd>");
-            });
+        scope: {
+            rmatdat:"=chez"
+        },
+        template: template,
+        link: function (scope, element, attr){
+
         }
     }
+
 });

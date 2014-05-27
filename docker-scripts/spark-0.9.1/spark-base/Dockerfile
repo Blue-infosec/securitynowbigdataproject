@@ -11,7 +11,7 @@ ENV SCALA_HOME /opt/scala-$SCALA_VERSION
 ENV SPARK_HOME /opt/spark-$SPARK_VERSION
 ENV PATH $SPARK_HOME:$SCALA_HOME/bin:$PATH
 
-RUN apt-get install python-dev less net-tools apt-utils vim-tiny sudo openssh-server iputils-ping git wget curl python-pip -y
+RUN apt-get install python-dev less net-tools apt-utils vim-tiny sudo openssh-server libyaml-0-2 iputils-ping git wget curl python-pip -y
 RUN /usr/bin/yes | sudo pip install nltk numpy
 
 # Install Scala

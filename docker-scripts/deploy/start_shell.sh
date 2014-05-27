@@ -167,8 +167,7 @@ sleep 2
 set_nameserver_data
 
 echo -n "waiting for nameserver to find shell "
-SHELL_IP=$(docker inspect $SHELL_ID | \
-    grep IPAddress | awk '{print $2}' | tr -d '":,')
+SHELL_IP=$(docker inspect $SHELL_ID | grep IPAddress | awk '{print $2}' | tr -d '":,')
 
 check_hostname result $SHELL_HOSTNAME $SHELL_IP
 until [ "$result" -eq 0 ]; do
