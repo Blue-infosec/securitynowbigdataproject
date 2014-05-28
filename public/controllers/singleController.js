@@ -1,5 +1,7 @@
 function singleController($scope, gettwapp){
-    gettwapp.episode("020", function(data){
+    $scope.searchval = "004";
+
+    gettwapp.episode($scope.searchval, function(data){
         $scope.$apply(function(){
             $scope.thedata = data;
         });
