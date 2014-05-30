@@ -24,10 +24,12 @@ WORKDIR /opt/scala-2.11.0/ RUN export PATH=`pwd`/bin:$PATH && export SCALA_HOME=
 # Install Spark
 ADD http://d3kbcqa49mib13.cloudfront.net/spark-0.9.1-bin-hadoop2.tgz /opt
 
-WORKDIR /opt RUN tar -xvf spark-0.9.1-bin-hadoop2.tgz
-WORKDIR /opt RUN (ln -s /opt/spark-0.9.1-bin-hadoop2 /opt/spark-0.9.1 && rm spark-0.9.1-bin-hadoop2.tgz)
+WORKDIR /opt RUN tar -xvf spark-0.9.1-bin-hadoop2.tgz -C /opt/spark
+WORKDIR /opt RUN rm spark-0.9.1-bin-hadoop2.tgz
+
+RUN ls -alh /opt
 
 # Add Shark config files and configure script
 ADD files /root/spark_files
 
-WORKDIR /opt/spark-0.9.1 RUN sbt/sbt clean assembly
+WORKDIR /opt/spark RUN sbt/sbt clean assembly

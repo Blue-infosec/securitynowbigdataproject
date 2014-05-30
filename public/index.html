@@ -6,20 +6,20 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css"/>
     <link rel="stylesheet" href="css/main.css"/>
-    <title>Time Warner Demo</title>
+    <title>SPANM Demo</title>
 </head>
 <body>
 
-<header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+<header class="navbar navbar-static-top bs-docs-nav bg-success" id="top" role="banner">
     <div class="container">
-        <div class="navbar-header">
+        <div class="navbar-header ">
             <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="../" class="navbar-brand">TWAPP Demo</a>
+            <a href="../" class="navbar-brand">SPANM Demo</a>
         </div>
         <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
             <ul class="nav navbar-nav">
@@ -27,36 +27,37 @@
                     <a href="#/single">single episode</a>
                 </li>
                 <li>
-                    <a href="#/all">All Episodes (SLOW! )</a>
+                    <a href="#/all">All Episodes (SLOW! May lock you up)</a>
+                </li>
+                <li>
+                    <a href="#/chart">Charts</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="https://levidehaan.com">Levi</a></li>
                 <li><a href="http://github.com/levidehaan">My Code</a></li>
+                <li><a href="https://github.com/levidehaan/TWAppDemo" class="btn btn-outline-inverse btn-lg"
+                   onclick="_gaq.push(['_trackEvent', 'going to code actions', 'gettingcode', 'Going to github acct']);">Go to Github
+                    Page</a></li>
             </ul>
         </nav>
     </div>
 </header>
 
-<main class="bs-docs-masthead" id="content" role="main">
+<div class="jumbotron">
     <div class="container">
-        <p class="lead">Time Warner Spark/Mongo/Python/Nodejs/Angular Demo App.</p>
-
-        <p class="lead">
-            <a href="https://github.com/levidehaan/TWAppDemo" class="btn btn-outline-inverse btn-lg"
-               onclick="_gaq.push(['_trackEvent', 'Jumbotron actions', 'Download', 'Download 3.1.1']);">Go to Github
-                Page</a>
-        </p>
+        <h1>SPANM Demo App</h1>
+        <p class="alert-danger">Spark/Python/Angular/Nodejs/Mongo Demo App.</p>
+        <p>An example application showing off my skills with many different tools, and sentiment analysis is just cool.</p>
+        <p>The application is getting its sentiment analysis results from NLTK + the movie review corpus.</p>
+        <p>There are several other corpus I could have used, and may still use, but for now it's not as accurate as it can be :)</p>
     </div>
-</main>
-
-
-<div ng-controller="dataController" ng-model="thedata">
-    <input type="text" id="search" ng-model="searchval"/>
-    <article data-ng-repeat="data in thedata">
-        <secnow chez="data"></secnow>
-    </article>
 </div>
+
+<br/><br/>
+
+<ng-view></ng-view>
+<br/><br/>
 
 <script type="application/javascript" src="bower_components/angular/angular.js"></script>
 <script type="application/javascript" src="bower_components/angular-ui/build/angular-ui.js"></script>
@@ -64,7 +65,8 @@
 <script type="application/javascript" src="bower_components/ng-resource/dist/ng-resource.js"></script>
 <script type="application/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
 <script type="application/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-
+<script type="application/javascript" src="bower_components/d3/d3.js"></script>
+<script type="application/javascript" src="bower_components/n3-line-chart/dist/line-chart.js"></script>
 <!--Main - contains random stuff and the router-->
 <script type="application/javascript" src="js/main.js"></script>
 
@@ -72,6 +74,9 @@
 <script type="application/javascript" src="controllers/dataController.js"></script>
 <script type="application/javascript" src="controllers/mainController.js"></script>
 <script type="application/javascript" src="controllers/searchController.js"></script>
+<script type="application/javascript" src="controllers/chartController.js"></script>
+<script type="application/javascript" src="controllers/singleController.js"></script>
+<script type="application/javascript" src="controllers/allController.js"></script>
 <script type="application/javascript" src="directives/securitynow.js"></script>
 <script type="application/javascript" src="services/twapp.js"></script>
 

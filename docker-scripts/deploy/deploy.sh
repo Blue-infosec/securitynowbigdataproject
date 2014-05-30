@@ -3,7 +3,7 @@
 DEBUG=0
 BASEDIR=$(cd $(dirname $0); pwd)
 
-spark_images=( "spark:0.9.1" "spark:0.9.0")
+spark_images=( "spark:0.9.1")
 shark_images=( "shark:0.8.0" )
 NAMESERVER_IMAGE="dnsmasq-precise"
 

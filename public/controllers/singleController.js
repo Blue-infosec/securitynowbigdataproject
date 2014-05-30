@@ -1,5 +1,5 @@
 function singleController($scope, gettwapp){
-    $scope.searchval = "004";
+    $scope.searchval = "042";
 
     gettwapp.episode($scope.searchval, function(data){
         $scope.$apply(function(){
@@ -7,10 +7,10 @@ function singleController($scope, gettwapp){
         });
     });
 
-    $scope.watch("searchval", function(){
-        console.log("searchval: scope: ", $scope);
-        if($scope.searchval.length > 3){
-            gettwapp.search($scope.searchval, function(searchres){
+    $scope.$watch("singlesearchvalue", function(){
+        console.log("singlesearchvalue: scope: ", $scope);
+        if($scope.singlesearchvalue.length > 2){
+            gettwapp.episode($scope.singlesearchvalue, function(searchres){
                 console.log("Search Results: ", searchres);
 
                 $scope.$apply(function(){

@@ -4,8 +4,10 @@ var gtw = angular.module('twAppServices', ['ngResource']);
 
         console.log("SERVICE INITIALIZED");
 
-            this.fullSet = function (cb) {
-                $.get("/fullset", function (data) {
+            this.fullSet = function (limit, skip, cb) {
+                skip == 0 ? skip = 1: skip = skip;
+                limit == 0 ? limit = 1: limit = limit;
+                $.get("/fullset/"+limit+"/"+skip+"", function (data) {
                     cb(data);
                 });
             }

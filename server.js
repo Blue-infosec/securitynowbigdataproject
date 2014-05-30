@@ -23,7 +23,8 @@ var sockjs = require('sockjs'),
     spawn = require('child_process').spawn,
     exec = require('child_process').exec,
     program = require('commander'), collection,
-    format = require('util').format;
+    format = require('util').format,
+    mongoip = '172.17.0.2';
 
 
 memwatch.on('leak', function (info) {
@@ -62,7 +63,7 @@ if (cluster.isMaster) { // fork worker threads
     function calldocker(cmd, name) {
 
 
-        if (0 == cmd.length){
+        if (0 == cmd.length) {
             cmd = ['/bin/bash'];
         }
 
@@ -80,7 +81,7 @@ if (cluster.isMaster) { // fork worker threads
     app.use(bodyParser());
 
     app.use(cookieParser());
-    app.use(session({ secret: 'chessfrombrains', cookie: { maxAge: 60000 }}));
+    app.use(session({ secret: 'nerfherder', cookie: { maxAge: 60000 }}));
 
     app.engine('jade', cons.jade);
     app.set('view engine', 'jade');
@@ -99,42 +100,66 @@ if (cluster.isMaster) { // fork worker threads
         console.log("/ HEADERS: ", req.headers['user-agent']);
     });
 
-    mongo.connect('mongodb://172.17.0.5:27017/twapp_storage', function(err, db) {
-        if(err) throw err;
+    mongo.connect('mongodb://' + mongoip + ':27017/twapp_storage_new', function (err, db) {
+        if (err) throw err;
 
         collection = db.collection('posts');
 
-        collection.find("security",{fields: {Data: 1}}).toArray(function(err, docs) {
-            console.log("Returned #" + docs.length + " documents");
-        });
-
-        app.get('/fullset', function(req, res){
+        app.get('/fullset/:limit/:skip', function (req, res) {
             console.log("SOMEONE's Browser is about to get Really sluggish!");
             console.log("/ HEADERS: ", req.headers['user-agent']);
-            collection.find().toArray(function(err, docs) {
+            console.log("Limit: ", req.params['limit']);
+            console.log("Skip: ", req.params['skip']);
+            collection.find({}, { limit: req.params['limit'], skip: req.params['skip']}).toArray(function (err, docs) {
                 console.log("Returned #" + docs.length + " documents");
-                res.send(docs);
+                res.send({data: docs, count: docs.length});
             });
         });
 
-        app.get('/episode/:num', function(req, res){
+        app.get('/episode/:num', function (req, res) {
             console.log("/ HEADERS: ", req.headers['user-agent']);
             console.log("CONNECTION FROM: ", req.headers)
-            collection.find({ episode: req.params['num'] } ).toArray(function(err, docs) {
-                console.log("Returned #" + docs.length + " Epidsode based documents");
+            collection.find({ episode: req.params['num'] }).toArray(function (err, docs) {
+                console.log("Returned #" + docs.length + " Episode based documents");
                 res.send(docs);
             });
         });
 
-        app.get('/search/:val', function(req, res){
+        app.get('/search/:val', function (req, res) {
             console.log("/ HEADERS: ", req.headers['user-agent']);
             console.log("CONNECTION FROM: ", req.headers)
             console.log("QUERY VALUES: ", req.params['val']);
-            collection.find({ original: {"$regex": req.params['val'] }} ).toArray(function(err, docs) {
+            collection.find({ original: {"$regex": req.params['val'] }}).toArray(function (err, docs) {
+                console.log("Returned #" + docs.length + " Episode based documents");
+                res.send(docs);
+            });
+        });
+
+        app.get('/chart/:num', function (req, res) {
+            console.log("/ HEADERS: ", req.headers['user-agent']);
+            console.log("CONNECTION FROM: ", req.headers)
+            collection.find({ episode: req.params['num'] }).toArray(function (err, docs) {
+                console.log("Returned #" + docs.length + " Episode based documents");
+                res.send(docs);
+            });
+        });
+
+
+        app.get('/mr/:search', function (req, res) {
+            console.log("/ HEADERS: ", req.headers['user-agent']);
+            console.log("CONNECTION FROM: ", req.headers)
+            collection.mapreduce(function () {
+                //emit(req.params['search']);
+            }, function (episode, entities) {
+                //do map reduce stuff here
+
+            }).toArray(function (err, docs) {
                 console.log("Returned #" + docs.length + " Epidsode based documents");
                 res.send(docs);
             });
         });
+
+
     });
 
 

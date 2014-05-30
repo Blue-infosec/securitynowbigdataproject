@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 function cleanImages(){
 #remove the docker images
