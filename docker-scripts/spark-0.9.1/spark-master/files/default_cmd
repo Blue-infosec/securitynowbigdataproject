@@ -10,6 +10,9 @@ echo "MASTER_IP=$IP"
 echo "preparing Spark"
 prepare_spark $IP
 
+echo "fixing something stupid i hope"
+sed -i.bak s/\$RUNNER/java/g /opt/spark-0.9.1/bin/spark-class
+
 echo "starting Hadoop Namenode"
 sudo -u hdfs hadoop namenode -format > /dev/null 2>&1
 service hadoop-namenode start > /dev/null 2>&1
@@ -22,4 +25,6 @@ sleep 5
 echo "starting Spark Master"
 cp /root/spark_master_files/run_spark_master.sh /
 chmod a+rx /run_spark_master.sh
-sudo -u hdfs SPARK_VERSION=$SPARK_VERSION /run_spark_master.sh
+sudo -u hdfs /run_spark_master.sh
+
+cat /opt/spark-0.9.1/logs/spark-hdfs-org.apache.spark.deploy.master.Master-1-master.out

@@ -1,6 +1,5 @@
 {
     "name":"twapp",
-    "preferGlobal":false,
     "version":"0.0.1",
     "private":true,
     "author":"Levi DeHaan <admin@levidehaan.com>",

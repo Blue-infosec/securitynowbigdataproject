@@ -1,6 +1,4 @@
-var sockjs = require('sockjs'),
-    redis = require('redis'),
-    express = require('express'),
+var express = require('express'),
     app = express(),
     fs = require('fs'),
     os = require('os'),
@@ -24,7 +22,7 @@ var sockjs = require('sockjs'),
     exec = require('child_process').exec,
     program = require('commander'), collection,
     format = require('util').format,
-    mongoip = '172.17.0.2';
+    mongoip = '172.17.0.8', mongodb = "twapp_spark_live01"; //"twapp_storage_new"
 
 
 memwatch.on('leak', function (info) {
@@ -97,17 +95,17 @@ if (cluster.isMaster) { // fork worker threads
     app.all('/', function (req, res) {
         res.set('Content-Type', 'text/html');
         res.send(index);
-        console.log("/ HEADERS: ", req.headers['user-agent']);
+        console.log("/ Address: ", req.connection.remoteAddress);
     });
 
-    mongo.connect('mongodb://' + mongoip + ':27017/twapp_storage_new', function (err, db) {
+    mongo.connect('mongodb://' + mongoip + ':27017/' + mongodb + '', function (err, db) {
         if (err) throw err;
 
         collection = db.collection('posts');
 
         app.get('/fullset/:limit/:skip', function (req, res) {
             console.log("SOMEONE's Browser is about to get Really sluggish!");
-            console.log("/ HEADERS: ", req.headers['user-agent']);
+            console.log("/ Address: ", req.connection.remoteAddress);
             console.log("Limit: ", req.params['limit']);
             console.log("Skip: ", req.params['skip']);
             collection.find({}, { limit: req.params['limit'], skip: req.params['skip']}).toArray(function (err, docs) {
@@ -117,7 +115,7 @@ if (cluster.isMaster) { // fork worker threads
         });
 
         app.get('/episode/:num', function (req, res) {
-            console.log("/ HEADERS: ", req.headers['user-agent']);
+            console.log("/ Address: ", req.connection.remoteAddress);
             console.log("CONNECTION FROM: ", req.headers)
             collection.find({ episode: req.params['num'] }).toArray(function (err, docs) {
                 console.log("Returned #" + docs.length + " Episode based documents");
@@ -125,8 +123,44 @@ if (cluster.isMaster) { // fork worker threads
             });
         });
 
+        app.get('/episodesentiment/:num', function (req, res) {
+            console.log("/ Address: ", req.connection.remoteAddress);
+            console.log("CONNECTION FROM: ", req.headers)
+            var pos, neg, temp;
+            // Map function
+            var map = function () {
+                emit(this.sentiment, this.episode);
+            };
+            // Reduce function
+            var reduce = function (k, vals) {
+                return;
+            };
+
+            collection.mapReduce(map, reduce, {out: {replace: 'tempCollection', readPreference: 'primary'}}, function (err, collection) {
+                // Mapreduce returns the temporary collection with the results
+                collection.find({"episode": req.params['num']}, function (err, result) {
+
+
+                    collection.findOne({'_id': 2}, function (err, result) {
+                        assert.equal(1, result.value);
+
+                        db.close();
+                    });
+                });
+            });
+        });
+
+        app.get('/textsearch/:search', function (req, res) {
+            console.log("/ Address: ", req.connection.remoteAddress);
+            console.log("CONNECTION FROM: ", req.headers)
+            collection.find({ tokens: req.params['search'] }).toArray(function (err, docs) {
+                console.log("Returned #" + docs.length + " Episode based documents");
+                res.send(docs);
+            });
+        });
+
         app.get('/search/:val', function (req, res) {
-            console.log("/ HEADERS: ", req.headers['user-agent']);
+            console.log("/ Address: ", req.connection.remoteAddress);
             console.log("CONNECTION FROM: ", req.headers)
             console.log("QUERY VALUES: ", req.params['val']);
             collection.find({ original: {"$regex": req.params['val'] }}).toArray(function (err, docs) {
@@ -136,7 +170,7 @@ if (cluster.isMaster) { // fork worker threads
         });
 
         app.get('/chart/:num', function (req, res) {
-            console.log("/ HEADERS: ", req.headers['user-agent']);
+            console.log("/ Address: ", req.connection.remoteAddress);
             console.log("CONNECTION FROM: ", req.headers)
             collection.find({ episode: req.params['num'] }).toArray(function (err, docs) {
                 console.log("Returned #" + docs.length + " Episode based documents");
@@ -146,7 +180,7 @@ if (cluster.isMaster) { // fork worker threads
 
 
         app.get('/mr/:search', function (req, res) {
-            console.log("/ HEADERS: ", req.headers['user-agent']);
+            console.log("/ Address: ", req.connection.remoteAddress);
             console.log("CONNECTION FROM: ", req.headers)
             collection.mapreduce(function () {
                 //emit(req.params['search']);

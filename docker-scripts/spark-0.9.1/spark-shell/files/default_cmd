@@ -4,6 +4,9 @@ source /root/spark_files/configure_spark.sh
 
 env
 
+echo "fixing something stupid i hope"
+sed -i.bak s/\$RUNNER/java/g /opt/spark-0.9.1/bin/spark-class
+
 echo "preparing Spark"
 prepare_spark "master"
 
@@ -22,5 +25,5 @@ sleep 3
 
 echo "starting Spark Shell"
 
-cd $SPARK_HOME
+cd /opt/spark-0.9.1/
 sudo -u hdfs MASTER=spark://master:7077 HDFS_PREFIX=hdfs://master:9000 ./bin/spark-shell

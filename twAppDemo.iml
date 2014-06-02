@@ -9,9 +9,8 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="semver.min" level="project" />
-    <orderEntry type="library" name="d3.min" level="project" />
     <orderEntry type="library" name="Python 2.7.6 (/usr/bin/python2.7) interpreter library" level="application" />
+    <orderEntry type="library" name="twAppDemo node_modules" level="project" />
   </component>
 </module>
 

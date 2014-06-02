@@ -1,0 +1,2 @@
+#worker
+FROM ubuntu:trusty

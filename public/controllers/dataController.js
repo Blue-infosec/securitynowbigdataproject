@@ -7,7 +7,7 @@ function dataController($scope, gettwapp){
     console.log("scope", $scope);
     $scope.$watch("searchval", function(){
         console.log("searchval: scope: ", $scope);
-        if($scope.searchval.length > 3){
+        if($scope.searchval.length >= 3){
             gettwapp.search($scope.searchval, function(searchres){
                 console.log("Search Results: ", searchres);
 

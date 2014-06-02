@@ -8,6 +8,9 @@ echo "WORKER_IP=$IP"
 echo "preparing Spark"
 prepare_spark $1
 
+echo "fixing something stupid i hope"
+sed -i.bak s/\$RUNNER/java/g /opt/spark-0.9.1/bin/spark-class
+
 echo "starting Hadoop Datanode"
 service hadoop-datanode start
 
