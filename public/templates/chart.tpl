@@ -1,6 +1,7 @@
-Charts are coming soon, D3 visualization with N3 angular data binding :)
-this is going to rawk, just building out the server portions to serve up the data nice and easy
-
-<div ng-repeat="tdata in thedata">
-<chart-display rmatdat="tdata"></chart-display>
+<div class="jumbotron">
+    <h1>Sentiment Chart</h1>
+    <p>This chart contains positive sentiment analysis counts for 20 episodes</p>
+</div>
+<div>
+    <linechart data='data' options='options'></linechart>
 </div>

@@ -1,4 +1,4 @@
-var twapp = angular.module("tw_app", ['ngRoute', 'twAppServices']);
+var twapp = angular.module("tw_app", ['ngRoute', 'twAppServices','n3-charts.linechart']);
 
 
 twapp.config(['$routeProvider', '$locationProvider',

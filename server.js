@@ -139,6 +139,12 @@ if (cluster.isMaster) { // fork worker threads
             });
         });
 
+        app.get('/chartpos/:num/:num2', function (req, res) {
+            collection.aggregate([{ $match: {speaker: { "$regex":"LEO"}, sentiment: { $in: ["neg"] }, episode: {$gte: req.params['num'], $lt: req.params['num2']}}},{ $group: { speaker: { "$regex": "LEO" }, total: { $sum: "$amount" } } } ], function (err, count) {
+
+            });
+        });
+
         app.get('/mappit/:num', function (req, res) {
             console.log("/ Address: ", req.connection.remoteAddress);
             console.log("CONNECTION FROM: ", req.headers)
