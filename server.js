@@ -22,7 +22,7 @@ var express = require('express'),
     exec = require('child_process').exec,
     program = require('commander'), collection,
     format = require('util').format,
-    mongoip = '172.17.0.8', mongodb = "twapp_spark_live01"; //"twapp_storage_new"
+    mongoip = '', mongodb = "twapp_spark_live01"; //"twapp_storage_new"
 
 
 memwatch.on('leak', function (info) {
@@ -123,30 +123,48 @@ if (cluster.isMaster) { // fork worker threads
             });
         });
 
-        app.get('/episodesentiment/:num', function (req, res) {
+        app.get('/whoshappy/:num', function (req, res) {
+            collection.count({ episode: req.params['num'], speaker: { "$regex":"LEO"}, sentiment: { $in: ["pos"] }}, function (err, count) {
+                collection.count({ episode: req.params['num'], speaker: { "$regex":"STEVE"}, sentiment: { $in: ["pos"] }}, function (err2, count2) {
+                    res.send({"steve": count2, "leo": count});
+                });
+            });
+        });
+
+        app.get('/whosmad/:num', function (req, res) {
+            collection.count({ episode: req.params['num'], speaker: { "$regex":"LEO"}, sentiment: { $in: ["neg"] }}, function (err, count) {
+                collection.count({ episode: req.params['num'], speaker: { "$regex":"STEVE"}, sentiment: { $in: ["neg"] }}, function (err2, count2) {
+                    res.send({"steve": count2, "leo": count});
+                });
+            });
+        });
+
+        app.get('/mappit/:num', function (req, res) {
             console.log("/ Address: ", req.connection.remoteAddress);
             console.log("CONNECTION FROM: ", req.headers)
+
             var pos, neg, temp;
-            // Map function
+
             var map = function () {
-                emit(this.sentiment, this.episode);
-            };
-            // Reduce function
-            var reduce = function (k, vals) {
-                return;
+                emit(this.sentiment, { "episode": this.episode, "speaker" : this.speaker });
             };
 
-            collection.mapReduce(map, reduce, {out: {replace: 'tempCollection', readPreference: 'primary'}}, function (err, collection) {
-                // Mapreduce returns the temporary collection with the results
-                collection.find({"episode": req.params['num']}, function (err, result) {
+            var reduce = function (sentiment, episode) {
+                var posit, negat
+                if(sentiment == "pos" || episode.speaker == "LEO:"){
+                    return { "episode": episode, "sentiment": sentiment }
+                }else{
+                    negat[sentiment] = episode
+                    incp++
+                }
+                return {"steve": sentiment, "leo": sentiment};
+            };
 
-
-                    collection.findOne({'_id': 2}, function (err, result) {
-                        assert.equal(1, result.value);
-
-                        db.close();
-                    });
-                });
+            collection.mapReduce(map, reduce, {out: {merge: 'fark'}}, function (err, collection) {
+                console.log("Collection");
+                console.log(collection);
+                console.log("error:")
+                console.log(err)
             });
         });
 

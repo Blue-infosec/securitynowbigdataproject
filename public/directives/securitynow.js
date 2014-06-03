@@ -4,7 +4,6 @@ twapp.directive("secnow", function(gettwapp){
 
     var template = '<div class="{{ rmatdat.sentiment }}">' +
         '<div class="episode">{{ rmatdat.episode }}</div>' +
-        '' +
         '<div class="name">{{ rmatdat.speaker }}</div>' +
         '<div class="description">{{ rmatdat.original }}</div>' +
         '<div class="highlight badge alert-success">{{ rmatdat.sentiment }}</a>' +
@@ -30,7 +29,6 @@ twapp.directive("secnowall", function(gettwapp){
     var template = '' +
         '<div class="{{ rmatdat.sentiment }}">' +
         '<div class="episode">{{ rmatdat.episode }}</div>' +
-        '' +
         '<div class="name">{{ rmatdat.speaker }}</div>' +
         '<div class="description">{{ rmatdat.original }}</div>' +
         '<div class="highlight badge alert-success">{{ rmatdat.sentiment }}</a>' +

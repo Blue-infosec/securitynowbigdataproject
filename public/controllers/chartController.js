@@ -1,5 +1,6 @@
 function chartController($scope, gettwapp){
-    gettwapp.fullSet(100, 1, function(data){
+    $scope.searchval = "042";
+    gettwapp.happy($scope.searchval, function(data){
         $scope.$apply(function(){
             $scope.thedata = data.data;
             $scope.count = data.count;

@@ -10,7 +10,6 @@ function dataController($scope, gettwapp){
         if($scope.searchval.length >= 3){
             gettwapp.search($scope.searchval, function(searchres){
                 console.log("Search Results: ", searchres);
-
                 $scope.$apply(function(){
                     $scope.thedata = searchres;
                 });
