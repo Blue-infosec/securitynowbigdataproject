@@ -16,4 +16,3 @@ RUN apt-get install -y libcurl3
 ADD files /root/mesos_files
 
 RUN (mv /root/mesos_files/mesos.tgz / && cd / && gunzip < mesos.tgz)|(cd /opt && tar -xvf -) && (rm /mesos.tgz && ln -s /opt/mesos /tmp/mesos)
-

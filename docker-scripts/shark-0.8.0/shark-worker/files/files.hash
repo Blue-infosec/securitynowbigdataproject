@@ -1,4 +1,0 @@
-98e2b8c1c08985d2a543111f17d0443496d289c0	Dockerfile
-29574e06fb2b6fae2a7174a1e0d346fd4ff9c1ad	build
-13df330ef86313459cf307dff817f35374839a3c	files/default_cmd
-fcc1c08edc91bce112b17af22f91e351a7a73491	files/run_shark_worker.sh

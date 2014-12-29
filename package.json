@@ -1,9 +1,9 @@
 {
-    "name":"twapp",
+    "name":"securitynowbigdataproject",
     "version":"0.0.1",
     "private":true,
     "author":"Levi DeHaan <admin@levidehaan.com>",
-    "description":"time warner demo app",
+    "description":"Security Now Big Data Project",
     "contributors":[
     ],
     "scripts":{

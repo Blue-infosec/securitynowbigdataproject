@@ -1,9 +1,0 @@
-54b043f90487098fcdcbeae1a3c74ce06e27b4f5	Dockerfile
-05459dca3adc72fc508b0be40f6808230c1e97fd	files/multipleDictsSentiment.py
-3e340f401cff97aadd2d54b0bffdf9811f830d15	files/scala-2.11.1.deb
-d49f84370b022a3e1ae94ff6957a37dff576f90f	files/spark-env.sh
-b4b64785361e7f2c83b39d5f86610988a6e225dc	files/configure_spark.sh
-d72dbadc3904f327effddf99594045067be2f529	files/log4j.properties
-44616bc8e128d7e8922c98f3cb74143cfe3fdcf6	files/twapp.py
-e1486783106f83eae30895e53db8225173d64ac5	files/spark-0.9.1-bin-hadoop2.tgz
-fbf9499cd20a6f5b9cdc1bbb7592d58514bcb391	build.sh

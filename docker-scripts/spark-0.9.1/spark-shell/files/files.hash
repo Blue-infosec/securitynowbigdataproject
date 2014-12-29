@@ -1,5 +1,0 @@
-42b862d25663c00a129f507a7012c8fb9ff3e81c	Dockerfile
-a9a141d6d7e1d1b2b2d20c673e627cc4fca90fd5	files/default_cmd
-bf8d959a3bf4baa615aeb92f26353cd49227c67b	files/test.spark
-34e2e5c50b53f610ea0b7e83ca0dbcdd8452472e	files/test.txt
-e2a067d7793d9fac1d0ed518b536f1f01bf0efc6	build.sh
